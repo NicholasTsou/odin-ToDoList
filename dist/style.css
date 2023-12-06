@@ -1,0 +1,241 @@
+*{
+    padding: 0;
+    margin: 0;
+    /* outline: 2px solid red; */
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+:root{
+    --soft-green: rgb(227,235,180);
+    --soft-orange: rgb(229,192,62);
+    --dark-brown: rgb(140,123,114);
+    --dark-green: rgb(148,140,108);
+    --beige: rgb(251,251,243);
+    --gray: rgb(176,166,157);
+}
+
+body{
+    overflow: hidden;
+}
+
+.main{
+    height: 100vh;
+    background-color: var(--dark-green);
+}
+
+.one{
+    animation: fadein 1s, fadedown 1s forwards;
+    position: relative;
+}
+
+.two{
+    animation: fadein 1s forwards, fadedown 1s forwards;
+    animation-delay: 1.1s;
+    opacity: 0;
+    position: relative;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fadedown{
+    0%{
+        left: -100px;
+    }
+
+    to{
+        left: 0px;
+    }
+}
+
+#header{
+    height: 150px;
+    padding: 2rem;
+    background-color: var(--dark-browns);
+}
+
+.header-details{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.header-details p{
+    font-size: 2.8rem;
+}
+
+.header-details p .orange{
+    color: var(--soft-orange);
+}
+
+.header-details p .green{
+    color: var(--soft-green);
+}
+
+#section1{
+    display: flex;
+}
+
+#section1 .nav{
+    box-sizing: border-box;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--gray);
+    padding: 2rem;
+}
+
+#section1 .nav-items{
+    display: flex; 
+    /* justify-content: center; */
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+    border: 2px solid transparent;
+}
+
+#section1 .nav-items:hover{
+    border: 2px solid var(--dark-brown);
+    transition: all .25s ease-in-out;
+}
+
+#section1 .nav-items .nav-images{
+    width: 30px;
+}
+
+#section1 .nav-items p{
+    font-size: 1.4rem;
+}
+
+#section1 .project-section{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--dark-brown);
+}
+
+#section1 .nav-projects{
+    padding: 1rem;
+}
+
+#section1 .nav-projects .projects p{
+    width: 155px;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.4rem;
+    border: 2px solid transparent;
+    border-radius: 20px;
+}
+
+#section1 .nav-projects .projects p:hover{
+    border: 2px solid var(--dark-brown);
+    transition: all .25s ease-in-out;
+}
+
+#section1 .nav-projects .nav-title{
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+#section1 .nav-projects .add-projectBtn{
+    border: none;
+    background-color: var(--gray);
+    font-size: 1.4rem;
+    padding: 5px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#section1 .nav-projects .add-projectBtn:hover{
+    border: 2px solid var(--dark-brown);
+    transition: all .25s ease-in-out;
+}
+
+#section1 .projectAdd{
+    width: 165px;
+    display: none;
+    flex-direction: column;
+}
+
+#section1 .projectAdd .project-input{
+    width: 165px;
+    height: 25px;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    padding-left: 10px;
+
+}
+
+#section1 .projectAdd .buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+#section1 .projectAdd .buttons button{
+    width: 80px;
+    height: 25px;
+    text-decoration: none;
+    border: none;
+}
+
+#section1 .projectAdd .buttons .addBtn{
+    background-color: green;
+    border-radius: 20px;
+
+}
+
+#section1 .projectAdd .buttons .cancelBtn{
+    background-color: red;
+    border-radius: 20px;
+}
+
+
+
+#section1 .projectAdd .buttons button:hover{
+    opacity: .7;
+}
+
+
+#section1 .project-section{
+    display: flex;
+    justify-content: center;
+    padding: 5rem;
+}
+
+#section1 .project-section .project-details{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+#section1 .project-section .project-details .title{
+    font-size: 2.2rem;
+}
+
+#section1 .project-section .project-details .add-task{
+    border: 2px solid var(--dark-green);
+    width: 300px;
+    font-size: 1.6rem;
+    background-color: var(--dark-brown);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+#section1 .project-section .project-details .add-task:hover{
+    background-color: var(--dark-green);
+    transition: all .25s ease-in-out;
+}
