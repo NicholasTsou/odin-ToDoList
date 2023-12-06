@@ -1,0 +1,77 @@
+export function addingProTask(){
+
+    const addBtn = document.getElementById('addBtn');
+    const projectInput = document.getElementById('project-input');
+    const projects = document.getElementById('projects');
+    const title = document.getElementById('title');
+
+
+    const projectList = [];
+
+    const project = {
+        name: "",
+        tasks: [],
+    
+    };
+    
+    const tasks = {
+        taskName: "",
+        taskDescription: "",
+        taskDate: "",
+        taskImportant: false,
+    };
+
+    const project1 = Object.create(project);
+    project1.name = "Project 1";
+    projectList.push(project1);
+
+    console.log(projectList);
+    
+
+    function addProject(){
+
+        const projectName = projectInput.value;
+
+        if(projectName.trim() !== ""){
+            const newProject = Object.create(project);
+            newProject.name = projectName;
+
+            projectList.push(newProject);
+
+            projectInput.value = "";
+
+            displayProjects();
+        }else{
+            alert("Please enter a project name. ");
+        }
+    }
+
+    function displayProjects(){
+
+        projects.innerHTML = "";
+
+        for(let i = 0; i < projectList.length; i++){
+            const project = projectList[i];
+
+
+            const pTag = document.createElement('p');
+            pTag.textContent = ` ${project.name}`;
+
+            pTag.addEventListener("click", function () {
+                displayProjectTitle(project.name);
+            });
+
+            projects.appendChild(pTag);
+        }
+
+    }
+
+    function displayProjectTitle(newTitle){
+
+        title.textContent = `${newTitle}`;
+    }
+
+    displayProjects();
+    addBtn.addEventListener('click', addProject);
+}
+
