@@ -215,7 +215,7 @@ body{
 }
 
 #section1 .project-section .project-details{
-    width: 500px;
+    /* width: 500px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,4 +238,113 @@ body{
 #section1 .project-section .project-details .add-task:hover{
     background-color: var(--dark-green);
     transition: all .25s ease-in-out;
+}
+
+.taskForm{
+    display: none;
+    /* width: 900px; */
+    justify-content: center;
+    gap: 20px;
+    background-color: var(--dark-green);
+    padding: 2rem;
+    border-radius: 20px;
+    
+}
+
+.taskForm .taskDiv{
+    display: flex;
+    flex-direction: column;
+    /* height: 100px; */
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    /* justify-content: center; */
+    
+}
+
+.taskForm .taskDiv .taskTitle{
+    padding-bottom: 1rem;
+    font-weight: 700;
+    color: var(--soft-orange);
+}
+
+.taskForm .taskDiv button{
+    width: 100px;
+    height: 25px;
+    border: none;
+    background-color: var(--dark-green);
+    border: 2px solid var(--dark-brown);
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.taskForm .taskDiv .subBtn:hover{
+    background-color: var(--dark-brown);
+    transition: all .25s ease-in-out;
+}
+.taskForm .taskDiv .taskInput, .taskForm .taskDiv .taskDescription, .taskForm .taskDiv .taskDate{
+    background-color: var(--gray);
+    border: none;
+}
+.taskForm .taskDiv .taskInput{
+    width: 150px;
+    padding-left: 5px;
+    height: 30px;
+}
+
+.taskForm .taskDiv .taskDescription{
+    resize: none;
+    width: 150px;
+    height: 60px;
+    padding: 5px;
+}
+
+.taskForm .taskDiv .taskDate{
+    padding: .5rem;
+}
+
+.taskForm .taskDiv .important{
+    background-color: green;
+}
+
+.project-details .tasksContainer{
+    width: 500px;
+    background-color: var(--dark-green);
+    border-radius: 20px;
+    padding: 1rem;
+    display: none;
+    flex-direction: column;
+}
+
+.project-details .tasksContainer .task-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6px;
+}
+
+.project-details .tasksContainer .button-container{
+    display: flex;
+    gap: 20px;
+}
+
+.project-details .tasksContainer .button-container button{
+    border: none;
+    background-color: var(--dark-green);
+    border: 2px solid;
+    width: 20px;
+    border-radius: 20px;
+}
+
+.project-details .tasksContainer .button-container button:hover{
+    background-color: black;
+    opacity: 0.7;
+    transition: all .25s ease-in-out;
+}
+
+.error{
+    border: 2px solid red;
 }
