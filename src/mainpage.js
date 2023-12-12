@@ -45,14 +45,15 @@ export function createMainPage(){
     navDetails.classList.add('nav-details');
     
         const itemsData = [
-            { imageSrc: 'images/inbox.png', text: 'Inbox' },
-            { imageSrc: 'images/today.png', text: 'Today' },
-            { imageSrc: 'images/complete.png', text: 'Finished' }
+            { imageSrc: 'images/inbox.png', text: 'All Tasks', id: 'allTasks' },
+            { imageSrc: 'images/today.png', text: 'Today', id: 'today'},
+            { imageSrc: 'images/complete.png', text: 'Finished', id: 'complete' }
         ];
     
         itemsData.forEach(function (itemData) {
             const navItem = document.createElement('div');
             navItem.classList.add('nav-items');
+            navItem.id = itemData.id;
     
             const img = document.createElement('img');
             img.classList.add('nav-images');
@@ -78,8 +79,8 @@ export function createMainPage(){
     projects.classList.add('projects');
     projects.setAttribute('id', 'projects');
 
-    const p = document.createElement('p');
-    p.textContent = 'Test Projects';
+    // const p = document.createElement('p');
+    // p.textContent = 'Test Projects';
 
     const addProject = document.createElement('button');
     addProject.classList.add('add-projectBtn');
@@ -120,10 +121,85 @@ export function createMainPage(){
 
     const addTask = document.createElement('button');
     addTask.classList.add('add-task');
+    addTask.setAttribute('id', 'add-task');
     addTask.textContent = '+ add task';
+
+    const form = document.createElement('form');
+    form.classList.add('taskForm');
+    form.setAttribute('id', 'taskForm');
+
+    const taskDiv = document.createElement('div');
+    taskDiv.classList.add('taskDiv');
+
+    const taskTitle = document.createElement('label');
+    taskTitle.classList.add('taskTitle');
+    taskTitle.textContent = 'Task Title';
+
+    const taskInput = document.createElement('input');
+    taskInput.setAttribute('id', 'taskTitle');
+    taskInput.classList.add('taskInput');
+
+    taskDiv.appendChild(taskTitle);
+    taskDiv.appendChild(taskInput);
+    form.appendChild(taskDiv);
     
+    const taskDiv2 = document.createElement('div');
+    taskDiv2.classList.add('taskDiv');
 
+    const taskTitle2 = document.createElement('label');
+    taskTitle2.classList.add('taskTitle');
+    taskTitle2.textContent = 'Task Date';
 
+    const taskInput2 = document.createElement('input');
+    taskInput2.classList.add('taskDate');
+    taskInput2.setAttribute('id', 'taskDate');
+    taskInput2.type = 'date';
+    
+    taskDiv2.appendChild(taskTitle2);
+    taskDiv2.appendChild(taskInput2);
+    form.appendChild(taskDiv2);
+
+    const taskDiv3 = document.createElement('div');
+    taskDiv3.classList.add('taskDiv');
+
+    const taskTitle3 = document.createElement('label');
+    taskTitle3.classList.add('taskTitle');
+    taskTitle3.textContent = 'Task Importance';
+
+    const taskButton = document.createElement('button');
+    taskButton.classList.add('important');
+    taskButton.setAttribute('id', 'important');
+    taskButton.type = 'button';
+    taskButton.textContent = 'Important';
+
+    taskDiv3.appendChild(taskTitle3);
+    taskDiv3.appendChild(taskButton);
+    form.appendChild(taskDiv3);
+
+    const taskDiv4 = document.createElement('div');
+    taskDiv4.classList.add('taskDiv');
+
+    const taskDiv5 = document.createElement('div');
+    taskDiv5.classList.add('taskDiv');
+
+    const taskTitle5 = document.createElement('label');
+    taskTitle5.classList.add('taskTitle');
+    taskTitle5.textContent = 'Task Add';
+
+    const taskButton2 = document.createElement('button');
+    taskButton2.classList.add('subBtn');
+    taskButton2.textContent = 'Add';
+    taskButton2.setAttribute('id', 'subBtn');
+    taskButton2.type = 'submit';
+
+    const tasksContainer = document.createElement('div');
+    tasksContainer.setAttribute('id', 'tasksContainer');
+    tasksContainer.classList.add('tasksContainer');
+
+    
+    taskDiv5.appendChild(taskTitle5);
+    taskDiv5.appendChild(taskButton2);
+    form.appendChild(taskDiv5);
     
     
     headerDetails.appendChild(oneImg);
@@ -131,7 +207,7 @@ export function createMainPage(){
     header.appendChild(headerDetails);
     nav.appendChild(navDetails);
     navProjects.appendChild(navTitle)
-    projects.appendChild(p);
+    // projects.appendChild(p);
     navProjects.appendChild(projects);
     navProjects.appendChild(addProject);
     buttons.appendChild(addBtn);
@@ -143,6 +219,8 @@ export function createMainPage(){
     section1.appendChild(nav);
     projectDetails.appendChild(title);
     projectDetails.appendChild(addTask);
+    projectDetails.appendChild(form);
+    projectDetails.appendChild(tasksContainer);
     projectSection.appendChild(projectDetails);
     section1.appendChild(projectSection);
     main.appendChild(header);
