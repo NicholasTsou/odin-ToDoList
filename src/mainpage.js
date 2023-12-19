@@ -13,7 +13,7 @@ export function createMainPage(){
 
     const oneImg = document.createElement('img');
     oneImg.classList.add('one');
-    oneImg.src = '/dist/images/logo.png';
+    oneImg.src = 'images/logo.png';
 
     const twoP = document.createElement('p');
     twoP.classList.add('two');
