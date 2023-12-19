@@ -1,5 +1,5 @@
 export function addingProTask(){
-
+    //creating variables and constants
     const addBtn = document.getElementById('addBtn');
     const projectInput = document.getElementById('project-input');
     const projects = document.getElementById('projects');
@@ -8,19 +8,24 @@ export function addingProTask(){
     const subBtn = document.getElementById('subBtn');
     const tasksContainer = document.getElementById('tasksContainer');
     const allTasksBtn = document.getElementById('allTasks');
+    const todayBtn = document.getElementById('today');
+    const completedBtn = document.getElementById('complete');
     const titleInput1 = document.getElementById('taskTitle');
     const dateInput1 = document.getElementById('taskDate');
-
     const addTask = document.getElementById('add-task');
     const taskForm = document.getElementById('taskForm');
 
     const projectList = [];
-
+    const completedTask = [];
+    var todayDate = new Date();
+    var day = todayDate.getDate();
+    var month = todayDate.getMonth() + 1;
+    var year = todayDate.getFullYear();
+    todayDate = year + '-' + month + '-' + day;
     let currentProject = null;
 
-
+    //function to check if there are any tasks throughout all the projects
     function allTasks(){
-
          // Check if there are any tasks in all projects
     if (projectList.some(project => project.tasks.length > 0)) {
         tasksContainer.style.display = 'flex';
@@ -28,10 +33,177 @@ export function addingProTask(){
         hideTaskForm();
         hideAddTaskBtn();
     } else {
-        alert("No tasks available. Add tasks to projects first.");
+        hideTasksContainer(); 
+        console.log('no all tasks found');
+        }
     }
+    //function to check if there are any tasks that are the same date as today
+    function todaysTasks(){
+        if (projectList.some(project => project.tasks.length > 0 && project.tasks.some(task => task.taskDate === todayDate))) {
+            tasksContainer.style.display = 'flex';
+            checkSameDateTasks();
+            hideTaskForm();
+            hideAddTaskBtn();
+        } else {
+            hideTasksContainer(); 
+            console.log('no today tasks found');
+            }
+    }
+    //function to check if any tasks have been completed
+    function completeTasks(){
+        console.log(completedTask);
+        if(completedTask.length > 0){
+            checkCompleteTasks();
+            tasksContainer.style.display = 'flex';
+            hideTaskForm();
+            hideAddTaskBtn();
+            console.log("complete tasks found");
+        }else{
+            hideTasksContainer(); 
+            console.log('no completed tasks found');
+        }
     }
 
+    //function to show all the completed tasks in the tasks container
+    function checkCompleteTasks(){
+        tasksContainer.innerHTML = ''; // Clear previous content
+
+        for(let i = 0; i < completedTask.length; i++){
+            const task = completedTask[i];
+
+            console.log(completedTask[i]);
+                // Create a container for each task
+                const taskContainer = document.createElement('div');
+                taskContainer.classList.add('task-container');
+
+                // Create divs for task information
+                const infoContainer = document.createElement('div');
+                infoContainer.classList.add('info-container');
+
+                const titleDateContainer = document.createElement('div');
+                titleDateContainer.textContent = `${task.taskName} | ${task.taskDate}`;
+                infoContainer.appendChild(titleDateContainer);
+
+                const buttonContainer = document.createElement('div');
+                buttonContainer.classList.add('button-container');
+
+                const importanceContainer = document.createElement('div');
+                importanceContainer.textContent = `${task.taskImportant}`;
+                buttonContainer.appendChild(importanceContainer);
+
+                taskContainer.appendChild(infoContainer);
+                taskContainer.appendChild(buttonContainer);
+
+                tasksContainer.appendChild(taskContainer);
+            
+        }
+    }
+
+    //function to show all the same date tasks in the tasks container
+    function checkSameDateTasks() {
+        tasksContainer.innerHTML = ''; // Clear previous content
+    
+        // Create a container for each task
+        for (let i = 0; i < projectList.length; i++) {
+            const project = projectList[i];
+    
+            // check each tasks in the project
+            project.tasks.forEach((task, index) => {
+                const taskDate = task.taskDate;
+        
+                // Compare the task date with todayDate
+                if (todayDate === taskDate) {
+                    const taskContainer = document.createElement('div');
+                    taskContainer.classList.add('task-container');
+    
+                    // Create divs for task information
+                    const infoContainer = document.createElement('div');
+                    infoContainer.classList.add('info-container');
+    
+                    const titleDateContainer = document.createElement('div');
+                    titleDateContainer.textContent = `${task.taskName} | ${taskDate}`;
+    
+                    infoContainer.appendChild(titleDateContainer);
+    
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.classList.add('button-container');
+    
+                    const importanceContainer = document.createElement('div');
+                    importanceContainer.textContent = `${task.taskImportant}`;
+                    buttonContainer.appendChild(importanceContainer);
+    
+                    // Create a delete button
+                    const deleteButton = document.createElement('button');
+                    buttonContainer.appendChild(deleteButton);
+    
+                    deleteButton.addEventListener('click', function () {
+                        // Call a function to delete the task from the project
+                        deleteTodaysTask(i, index);
+    
+                    });
+    
+                    taskContainer.appendChild(infoContainer);
+                    taskContainer.appendChild(buttonContainer);
+    
+                    tasksContainer.appendChild(taskContainer);
+                }
+            });
+        }
+    }
+
+    //function to show all the tasks in all the projects in the tasks container
+    function checkProjectTasks() {
+        if (currentProject) {
+            if (currentProject.tasks.length > 0) {
+                // The project has tasks, show them
+                tasksContainer.innerHTML = "";
+                tasksContainer.style.display = 'flex';
+    
+                for (let i = 0; i < currentProject.tasks.length; i++) {
+                    const task = currentProject.tasks[i];
+    
+                    // Create a container for each task
+                    const taskContainer = document.createElement('div');
+                    taskContainer.classList.add('task-container');
+    
+                    // Create divs for task information
+                    const infoContainer = document.createElement('div');
+                    infoContainer.classList.add('info-container');
+    
+                    const titleDateContainer = document.createElement('div');
+                    titleDateContainer.textContent = `${task.taskName} | ${task.taskDate}`;
+                    infoContainer.appendChild(titleDateContainer);
+    
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.classList.add('button-container');
+    
+                    const importanceContainer = document.createElement('div');
+                    importanceContainer.textContent = `${task.taskImportant}`;
+                    buttonContainer.appendChild(importanceContainer);
+    
+                    // Create a delete button
+                    const deleteButton = document.createElement('button');
+                    buttonContainer.appendChild(deleteButton);
+                    deleteButton.addEventListener('click', (function (index) {
+                        return function () {
+                            // Call the deleteTask function passing the index
+                            deleteTaskCurrentProject(index);
+                        };
+                    })(i));
+    
+                    taskContainer.appendChild(infoContainer);
+                    taskContainer.appendChild(buttonContainer);
+    
+                    tasksContainer.appendChild(taskContainer);
+                }
+            } else {
+                // The project has no tasks, hide the tasks container
+                tasksContainer.style.display = 'none';
+            }
+        }
+    }
+    
+    //function to add a project in the project object
     function addProject(){
 
         const projectName = projectInput.value.trim();
@@ -62,7 +234,7 @@ export function addingProTask(){
         }
     }
 
-
+    //function to display all projects
     function displayProjects() {
         projects.innerHTML = "";
     
@@ -76,6 +248,7 @@ export function addingProTask(){
                 displayProjectTitle(project.name);
     
                 currentProject = project;
+                checkProjectTasks();
                 showAddTask();
             });
     
@@ -84,15 +257,17 @@ export function addingProTask(){
 
         subBtn.removeEventListener("click", handleAddTaskClick);
         subBtn.addEventListener("click", handleAddTaskClick);
-    
+        
     }
 
+    //function to add tasks
     function handleAddTaskClick(event) {
         event.preventDefault();
         const titleInput = document.getElementById('taskTitle').value;
         const dateInput = document.getElementById('taskDate').value;
         const important2 = document.getElementById('important').textContent;
         
+        //validate inputs
         if(!titleInput && !dateInput){
             titleInput1.style.border = '2px solid red';
             dateInput1.style.border = '2px solid red';
@@ -121,20 +296,23 @@ export function addingProTask(){
             titleInput1.style.border = '2px solid green';
             dateInput1.style.border = '2px solid green';
             hideTaskForm();
+            checkProjectTasks();
 
         } else {
             alert("Please select a project before adding a task.");
         }
     }
     
-
+    //function to display project title
     function displayProjectTitle(newTitle){
 
         title.textContent = `${newTitle}`;
         // tasksContainer.style.display = 'none';
         hideTaskForm();
+
     }
 
+    //function to check important/not important
     function checkButton(){
 
         if(important.textContent === 'Important'){
@@ -150,6 +328,7 @@ export function addingProTask(){
         }
     }
 
+    //function to show add task button
     function showAddTask(){
         
         if(currentProject){
@@ -161,10 +340,10 @@ export function addingProTask(){
     }
 
 
-    
+    //function to show tasks
     function showTaskList() {
         tasksContainer.innerHTML = ''; // Clear previous content
-    
+        
          // Create a container for each task
     for (let i = 0; i < projectList.length; i++) {
         const project = projectList[i];
@@ -172,6 +351,7 @@ export function addingProTask(){
         // Iterate over tasks in the project
         project.tasks.forEach((task, index) => {
             // Create a container for each task
+
             const taskContainer = document.createElement('div');
             taskContainer.classList.add('task-container');
 
@@ -180,7 +360,8 @@ export function addingProTask(){
             infoContainer.classList.add('info-container');
 
             const titleDateContainer = document.createElement('div');
-            titleDateContainer.textContent = `${task.taskName}       ${task.taskDate}`;
+            titleDateContainer.textContent = `${task.taskName} | ${task.taskDate}`;
+
             infoContainer.appendChild(titleDateContainer);
 
             const buttonContainer = document.createElement('div');
@@ -204,24 +385,71 @@ export function addingProTask(){
 
             tasksContainer.appendChild(taskContainer);
             
+            
         });
     
         }
     }
 
-    // Function to delete the task from the project
+    // Function to delete the task from any project (all tasks)
     function deleteTaskFromProject(projectIndex, taskIndex) {
         if (projectIndex >= 0 && projectIndex < projectList.length) {
             const project = projectList[projectIndex];
             if (taskIndex >= 0 && taskIndex < project.tasks.length) {
                 // Remove the task from the project's tasks array
-                project.tasks.splice(taskIndex, 1);
-                // Update the UI to reflect the changes
+                const deletedTask = project.tasks.splice(taskIndex, 1)[0];
+                //push removed task to completed task array
+                completedTask.push(deletedTask);
+
+                console.log(completedTask);
+                //update task list
                 showTaskList();
+
+                setTimeout(()=>{
+                    allTasks();
+                }, 100);
+                
             }
         }
     }
+    //function to delete task from current project selected
+    function deleteTaskCurrentProject(index){
+        if(currentProject && index >= 0 && index < currentProject.tasks.length){
+             // Remove the task from the project's tasks array
+            const deletedTask = currentProject.tasks.splice(index, 1)[0];
+            //push removed task to completed task array
+            completedTask.push(deletedTask);
 
+            console.log(completedTask);
+            //update task list
+            checkProjectTasks();
+        }
+    }
+
+    
+    // Function to delete the task from todays Date
+    function deleteTodaysTask(projectIndex, taskIndex) {
+        if (projectIndex >= 0 && projectIndex < projectList.length) {
+            const project = projectList[projectIndex];
+            if (taskIndex >= 0 && taskIndex < project.tasks.length) {
+                // Remove the task from the project's tasks array
+                const deletedTask = project.tasks.splice(taskIndex, 1)[0];
+                //push removed task to completed task array
+                completedTask.push(deletedTask);
+
+                console.log(completedTask);
+                //update task list
+                showTaskList();
+
+                setTimeout(()=>{
+                    todaysTasks();
+                }, 100);
+                
+            }
+        }
+    }
+    
+    //function to check project name
     function checkProName(name){
         for(let i = 0; i < projectList.length; i++){
             if (projectList[i].name === name){
@@ -231,12 +459,19 @@ export function addingProTask(){
         return false;
     }
 
+    // function to hide add task button
     function hideAddTaskBtn(){
         addTask.style.display = 'none';
     }
 
+    //function to hide task form
     function hideTaskForm(){
         taskForm.style.display = 'none';
+    }
+
+    //function to hide tasks container
+    function hideTasksContainer(){
+        tasksContainer.style.display = 'none';
     }
 
     displayProjects();
@@ -244,4 +479,6 @@ export function addingProTask(){
     addBtn.addEventListener('click', addProject);
     important.addEventListener('click', checkButton);
     allTasksBtn.addEventListener('click', allTasks);
+    todayBtn.addEventListener('click', todaysTasks);
+    completedBtn.addEventListener('click', completeTasks);
 }
