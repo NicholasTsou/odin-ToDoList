@@ -446,11 +446,18 @@ body{
         width: auto;
     }
 
-    .task-container .info-container{
+    /* .task-container .info-container{
         padding-right: 50px;
-    }
+    } */
 
     #section1 .nav-items {
         gap: 0rem;
     }
+
+    .project-details .tasksContainer .task-container{
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
 }
