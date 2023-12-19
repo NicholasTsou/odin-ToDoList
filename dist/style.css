@@ -403,3 +403,54 @@ body{
     }
 }
 
+
+@media screen and (max-width: 460px) {
+    .one{
+        width: 75px;
+    }
+
+    .header-details p{
+        font-size: 1.6rem;
+    }
+
+    #section1 .nav-items .nav-images {
+        width: 15px;
+    }
+
+    #section1 .nav-items p{
+        font-size: 1rem;
+    }
+
+    #section1 .nav-projects .nav-title {
+        font-size: 1.4rem;
+    }
+
+    #section1 .nav-projects .add-projectBtn{
+        font-size: 1rem;
+    }
+
+    .taskForm{
+        gap: 20px;
+    }
+
+    #section1 .project-section .project-details .title {
+        font-size: 1.6rem;
+    }
+
+    #section1 .project-section .project-details .add-task{
+        width: 125px;
+        font-size: 1rem;
+    }
+
+    .project-details .tasksContainer{
+        width: auto;
+    }
+
+    .task-container .info-container{
+        padding-right: 50px;
+    }
+
+    #section1 .nav-items {
+        gap: 0rem;
+    }
+}
